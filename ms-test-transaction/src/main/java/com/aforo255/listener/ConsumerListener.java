@@ -20,9 +20,9 @@ public class ConsumerListener {
 	@Autowired
 	private TransactionsEvents _transactionEvents;
 
-	@KafkaListener(topics = {"transaction-events"})
+	@KafkaListener(topics = {"operation-events"})
 	public void OnMessage(ConsumerRecord<Integer, String> consumerRecord) throws JsonMappingException, JsonProcessingException {
-		log.info("*************** MICROSERVICE HISTORICAL *******************");
+		log.info("*************** MICROSERVICE TRANSACTION *******************");
 		log.info("ConsumerRecord : {}", consumerRecord.value());
 			_transactionEvents.processTransactionEvent(consumerRecord);
 	}

@@ -11,26 +11,26 @@ public class Transaction {
 
 	
 	@BsonId
-	private String id_transaccion ; 
+	private String id ; 
 	
-	private int id_invoice;
+	private int invoiceId;
 	
 	private double amount ;
 	
 	private LocalDateTime date;
 
-	
-	public String getId_transaccion() {
-		return id_transaccion;
+
+	public String getId() {
+		return id;
 	}
-	public void setId_transaccion(String id_transaccion) {
-		this.id_transaccion = id_transaccion;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public int getId_invoice() {
-		return id_invoice;
+	public int getInvoiceId() {
+		return invoiceId;
 	}
-	public void setId_invoice(int id_invoice) {
-		this.id_invoice = id_invoice;
+	public void setInvoiceId(int invoiceId) {
+		this.invoiceId = invoiceId;
 	}
 	public double getAmount() {
 		return amount;
