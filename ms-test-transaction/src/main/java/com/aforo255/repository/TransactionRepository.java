@@ -8,6 +8,6 @@ import com.aforo255.entity.Transaction;
 public interface TransactionRepository extends MongoRepository<Transaction, String>{
 
 	
-	@Query("{'id_invoice':?0}")
+	@Query("{'invoiceId':?0}")
 	public Iterable<Transaction> findByInvoicetId(Integer id_invoice);
 }
