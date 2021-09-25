@@ -1,5 +1,9 @@
 # Proyecto Final - Aforo255
 
+## Video
+
+https://drive.google.com/file/d/1-59BBVSIRDnBlsD4WBw9mcyT2imgtZZu/view?usp=sharing
+
 ## Aplicación
 
 
