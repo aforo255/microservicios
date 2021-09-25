@@ -10,60 +10,6 @@
 curl --location --request GET 'http://localhost:8005/v1/invoice/all'
 ```
 
-```json
-[
-    {
-        "invoiceId": 1,
-        "amount": 1000.00,
-        "invoiceState": {
-            "statusId": 1,
-            "description": "Pagado"
-        },
-        "customer": {
-            "customerId": 1,
-            "fullName": "Ronaldo Sai"
-        }
-    },
-    {
-        "invoiceId": 2,
-        "amount": 2000.00,
-        "invoiceState": {
-            "statusId": 2,
-            "description": "Pendiente de Pago"
-        },
-        "customer": {
-            "customerId": 2,
-            "fullName": "Lionel Messi"
-        }
-    },
-    {
-        "invoiceId": 3,
-        "amount": 3000.00,
-        "invoiceState": {
-            "statusId": 2,
-            "description": "Pendiente de Pago"
-        },
-        "customer": {
-            "customerId": 2,
-            "fullName": "Lionel Messi"
-        }
-    },
-    {
-        "invoiceId": 4,
-        "amount": 4000.00,
-        "invoiceState": {
-            "statusId": 2,
-            "description": "Pendiente de Pago"
-        },
-        "customer": {
-            "customerId": 3,
-            "fullName": "Cristiano Ronaldo"
-        }
-    }
-]
-```
-
-
 ### 2.- Microservicio de Pago (ms-test-pay)
 
 #### Realizar Pago de factura
@@ -76,3 +22,42 @@ curl --location --request POST 'http://localhost:8006/v1/pay' \
     "amount": "4000"
 }'
 ```
+
+
+### 3.- Microservicio de Transacciones (ms-test-transaction)
+
+#### Listar transacciones
+
+```shell
+curl --location --request GET 'http://localhost:8082/listar'
+```
+
+
+### Comandos Docker
+
+``` shel
+#creacion de red:
+
+docker network create aforo255-test
+
+#Compilar y ejecución docker
+
+docker build -t app-config-server .
+docker build -t app-invoice .
+docker build -t app-pay .
+docker build -t app-transaction .
+
+docker run -p 8888:8888 --name app-config-server --network aforo255-test -d app-config-server
+docker run -p 8005:8005 --name app-invoice --network aforo255-test -d app-invoice
+docker run -p 8006:8006 --name app-pay --network aforo255-test -d app-pay
+docker run -p 8082:8082 --name app-transaction --network aforo255-test -d app-transaction
+
+# Conectar servicios externos a la red aforo255-test
+
+docker network connect aforo255-test bd-postgres12
+docker network connect aforo255-test bd-mysql8
+docker network connect aforo255-test servicekafka
+docker network connect aforo255-test db-mongo
+
+```
+
